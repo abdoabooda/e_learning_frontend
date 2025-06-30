@@ -19,7 +19,8 @@ const authSlice = createSlice({
             state.user = null
         },
         register(state,action){
-            state.registerMessage = action.payload
+            state.registerMessage = action.payload;
+            state.user = action.payload ;
         },
         setUserName(state,action){
             state.user.userName = action.payload

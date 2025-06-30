@@ -34,7 +34,7 @@ const Register = () => {
       icon : "success"
     }).then(isOk => {
       if(isOk){
-        navigate("/login")
+        navigate("/landing")
       }
     })
   }

@@ -33,6 +33,7 @@ export function registerUser(user){
         try {
             const {data} = await request.post("/api/auth/register",user)
             dispatch(authActions.register(data.message));
+            localStorage.setItem("userInfo",JSON.stringify(data))
         } catch (error) {
             toast.error(error.response.data.message);
         }
