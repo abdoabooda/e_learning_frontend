@@ -196,7 +196,7 @@ const ChatAi = () => {
       <SideBar />
       <div className="nav_chat">
         <p>Gemini</p>
-        <img src={profile?.profilePhoto?.url} alt="" />
+        <img src={assets.home_icon} alt="" onClick={()=> navigate('/landing')} />
       </div>
       <div className="container">
         {renderChatContent()}

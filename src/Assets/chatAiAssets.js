@@ -17,6 +17,7 @@ import delete_icon from './delete_icon.png'
 //import logout_icon from './logout_icon.jpg'
 import logout_icon from './End.png'
 import home_icon from './home_icon.png'
+import exit_logo from './exit_logo.png'
 
 export const assets = {
     history_icon,
@@ -37,4 +38,5 @@ export const assets = {
     delete_icon,
     logout_icon,
     home_icon,
+    exit_logo,
 }
