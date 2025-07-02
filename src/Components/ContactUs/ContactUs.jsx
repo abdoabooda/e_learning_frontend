@@ -5,7 +5,7 @@ import mail from '../../Assets/mail.png';
 import clock from '../../Assets/clock.png';
 import mappin from '../../Assets/mappin.png';
 import location from '../../Assets/location.png';
-import logos from '../../Assets/logos.png';
+import logos from '../../Assets/Logos.png';
 const ContactUs = () => {
     const openGoogleMaps = () => {
         window.open("https://maps.app.goo.gl/PQWgs5YNqZBUBNWa8", "_blank");
