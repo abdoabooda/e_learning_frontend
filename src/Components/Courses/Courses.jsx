@@ -4,7 +4,7 @@ import code from '../../Assets/code.png';
 import duration from '../../Assets/duration.png';
 import tag from '../../Assets/tag.png';
 import design from '../../Assets/design.png';
-import dev from '../../Assets/Develope.png';
+import dev from '../../Assets/develope.png';
 import markting from '../../Assets/markting.png';
 import bues from '../../Assets/bues.png';
 import programing from '../../Assets/programming.png';
