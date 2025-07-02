@@ -33,12 +33,8 @@ export function uploadProfilePhoto(newPhoto){
             dispatch(profileActions.setProfilePhoto(data.profilePhoto));
             // dispatch(authActions.setUserPhoto(data.profilePhoto));
             toast.success(data.message)
-
-            // modify the local storage of the user photo
-
-            // const user = JSON.parse(localStorage.setItem("userInfo"));
-            // user.profilePhoto = data?.profilePhoto
-            // localStorage.setItem("userInfo",JSON.stringify(user))
+            // ✅ Return the photo URL
+             return data.profilePhoto; // Assuming this is a string or an object with `.url`
 
         } catch (error) {
             toast.error(error.response.data.message);

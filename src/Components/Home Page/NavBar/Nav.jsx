@@ -64,8 +64,9 @@ const Nav = () => {
       <ul className={menuOpen ? 'nav-links open' : 'nav-links'}>
         {user && <li><a href="/landing">Home</a></li>}
         {user && <li><a href="/chat">Ai Assistant</a></li>}
-        {user?.role === 'admin' && <li><a href="/dashboard">Admin dashboard</a></li>}
-        {user?.role === 'student' && <li><a href="/dashboard">Student dashboard</a></li>}
+        {user?.role === 'admin' && <li><a href="/dashboard/overview">Admin dashboard</a></li>}
+        {user?.role === 'student' && <li><a href="/dashboard/performance">Student dashboard</a></li>}
+        {user?.role === 'instructor' && <li><a href="/dashboard/instructor">Instructor dashboard</a></li>}
         <li><a href="/Courses">Courses</a></li>
         <li><a href="/AboutUs">AboutUs</a></li>
         <li><a href="/ContactUs">Contact Us</a></li>

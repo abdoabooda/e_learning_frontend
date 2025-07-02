@@ -1,7 +1,7 @@
 import Layout from '../components/layout/Layout';
 import StatsCard from '../components/dashboard/StatsCard';
 import ChartCard from '../components/dashboard/ChartCard';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BookOpen, Users, FileQuestion, TrendingUp, Clock, Award } from 'lucide-react';
 import { mockChartData } from '../Data/mockData';
 //import { Users, BookOpen } from 'lucide-react';
 import './main.css';
@@ -44,6 +44,11 @@ const Dashboard = () => {
       value: courseCount || 0,
       icon: '📚',
     },
+        {
+      title: 'Total revenue',
+      value: courseCount || 0,
+      icon: '$',
+    },
   ];
 
   return (
@@ -72,22 +77,53 @@ const Dashboard = () => {
             ))}
           </div>
 
-        <div className="charts-section">
-          <ChartCard title="Student Progress">
-            <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={mockChartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Area type="monotone" dataKey="progress" stroke="#4F46E5" fill="#4F46E5" fillOpacity={0.1} />
-              </AreaChart>
-            </ResponsiveContainer>
-          </ChartCard>
+      {/* Quick Actions & Recent Activity */}
+      <div className="dashboard-actions-grid">
+        {/* Quick Actions */}
+        <div className="dashboard-card">
+          <h3 className="card-heading">Quick Actions</h3>
+          <div className="action-buttons">
+            <button className="action-button action-blue">
+              <BookOpen className="action-icon" />
+              <span className="action-text">Create New Course</span>
+            </button>
+            <button className="action-button action-green">
+              <FileQuestion className="action-icon" />
+              <span className="action-text">Add New Quiz</span>
+            </button>
+            <button className="action-button action-purple">
+              <Award className="action-icon" />
+              <span className="action-text">View Student Progress</span>
+            </button>
+          </div>
         </div>
+
+        {/* Recent Activity */}
+        <div className="dashboard-card">
+          <h3 className="card-heading">Recent Activity</h3>
+          <div className="activity-list">
+            {stats.recentActivity?.map((activity) => (
+              <div key={activity.id} className="activity-item">
+                <div className="activity-dot"></div>
+                <div className="activity-content">
+                  <p className="activity-description">{activity.description}</p>
+                  <div className="activity-timestamp">
+                    <Clock className="timestamp-icon" />
+                    {activity.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
       </div>
     </Layout>
   );
 };
 
 export default Dashboard;
+
+
+

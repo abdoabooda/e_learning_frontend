@@ -37,31 +37,42 @@ function ProfilePhoto({ profilePhoto, onPhotoSave }) {
     }
   };
 
-  const handleSavePhoto = async () => {
-    if (!pendingPhoto) return;
-    if (!user?.token) {
-      toast.error('Please log in to save photo');
-      return;
+ const handleSavePhoto = async () => {
+  if (!pendingPhoto) return;
+  if (!user?.token) {
+    toast.error('Please log in to save photo');
+    return;
+  }
+
+  setIsSavingPhoto(true);
+  try {
+    const formdata = new FormData();
+    formdata.append('image', pendingPhoto);
+
+    // Await the actual response
+    const data = await dispatch(uploadProfilePhoto(formdata));
+
+    if (data?.url || data?.secure_url) {
+      const photoUrl = data.url || data.secure_url;
+
+      onPhotoSave({ profilePhoto: { url: photoUrl } }); // Pass valid structure to parent
+      toast.success('Profile photo updated successfully');
+    } else {
+      throw new Error('Photo upload failed');
     }
 
-    setIsSavingPhoto(true);
-    try {
-      const formdata = new FormData()
-      formdata.append("image",pendingPhoto)
-      const response = dispatch(uploadProfilePhoto(formdata));
-      onPhotoSave(response); // Update ProfileEditor state
-      toast.success('Profile photo updated successfully');
-      if (pendingPhotoUrl) {
-        URL.revokeObjectURL(pendingPhotoUrl);
-      }
-      setPendingPhoto(null);
-      setPendingPhotoUrl(null);
-      setIsSavingPhoto(false);
-    } catch (err) {
-      toast.error(err.message || 'Failed to upload photo');
-      setIsSavingPhoto(false);
+    // Clean up
+    if (pendingPhotoUrl) {
+      URL.revokeObjectURL(pendingPhotoUrl);
     }
-  };
+    setPendingPhoto(null);
+    setPendingPhotoUrl(null);
+    setIsSavingPhoto(false);
+  } catch (err) {
+    toast.error(err.message || 'Failed to upload photo');
+    setIsSavingPhoto(false);
+  }
+};
 
   const handleCancelPhoto = () => {
     if (pendingPhotoUrl) {

@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import {  useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { BookOpen, Users, FileQuestion, TrendingUp, Award, Clock, DollarSign } from 'lucide-react';
 import Layout from '../components/layout/Layout';
 import Button from '../components/common/Button';
 import Card from '../components/common/Card';
 import './main.css';
-
+import request from '../../utils/request'
 
 const InstructorOverview = () => {
 
@@ -33,14 +32,14 @@ const InstructorOverview = () => {
     }
 
 
-    if (location.pathname === '/dashboard/instructor' && user.role === 'instructor') {
+    if (location.pathname === '/dashboard/instructor' && user.role === 'instructor'||user.role === 'admin') {
       const fetchInstructorData = async () => {
         try {
           const [statsResponse, coursesResponse] = await Promise.all([
-            axios.get('/api/dashboard/instructor', {
+            request.get('/api/users/dashboard/instructor', {
               headers: { Authorization: `Bearer ${user.token}` }
             }),
-            axios.get('/api/courses/instructor', {
+            request.get('/api/users/instructor/courses', {
               headers: { Authorization: `Bearer ${user.token}` }
             })
           ]);
@@ -70,7 +69,7 @@ const InstructorOverview = () => {
             <h1 className="heading">Instructor Overview</h1>
             <p className="text-secondary">Your teaching performance and course analytics</p>
           </div>
-          <Button variant="primary" onClick={() => navigate('/studentCourses')}>
+          <Button variant="primary" onClick={() => navigate('/dashboard/courses')}>
             View Courses
           </Button>
         </div>
@@ -91,7 +90,7 @@ const InstructorOverview = () => {
             <div className="instructor-stat-card">
               <div>
                 <p className="instructor-stat-label">Total Students</p>
-                <p className="instructor-stat-value">{instructorStats.totalStudents.toLocaleString()}</p>
+                <p className="instructor-stat-value">{instructorStats.totalStudents?.toLocaleString()}</p>
               </div>
               <div className="instructor-stat-icon bg-green">
                 <Users size={24} color="#fff" />
@@ -113,7 +112,7 @@ const InstructorOverview = () => {
             <div className="instructor-stat-card">
               <div>
                 <p className="instructor-stat-label">Total Revenue</p>
-                <p className="instructor-stat-value">${instructorStats.revenue.toLocaleString()}</p>
+                <p className="instructor-stat-value">${instructorStats.revenue?.toLocaleString()}</p>
               </div>
               <div className="instructor-stat-icon bg-orange">
                 <DollarSign size={24} color="#fff" />
@@ -128,14 +127,14 @@ const InstructorOverview = () => {
           </div>
           <div className="instructor-course-list">
             {instructorCourses.map((course) => (
-              <div key={course.id} className="instructor-course-item">
+              <div key={course._id} className="instructor-course-item">
                 <div className="instructor-course-info">
                   <div className="instructor-course-icon">
                     <BookOpen size={24} color="#2563EB" />
                   </div>
                   <div>
                     <h4 className="instructor-course-title">{course.title}</h4>
-                    <p className="instructor-course-meta">{course.level} • {course.duration}</p>
+                    <p className="instructor-course-meta">{course.level} • {course.duration} hours</p>
                   </div>
                 </div>
                 <div className="instructor-course-stats">
@@ -168,7 +167,7 @@ const InstructorOverview = () => {
               <h3 className="instructor-section-title">Recent Activity</h3>
             </div>
             <div className="instructor-activity-list">
-              {instructorStats.recentActivity.map((activity) => (
+              {instructorStats.recentActivity?.map((activity) => (
                 <div key={activity.id} className="instructor-activity-item">
                   <div className={`instructor-activity-icon ${
                     activity.type === 'enrollment' ? 'bg-green-light' :
@@ -244,3 +243,5 @@ const InstructorOverview = () => {
 
 
 export default InstructorOverview;
+
+

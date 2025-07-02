@@ -30,30 +30,34 @@ function ProfileEditor({ initialProfile, onSave, onClose }) {
     setProfile({ ...profile, [field]: value });
   };
 
-  const handleSave = async () => {
-    if (!user?.token) {
-      toast.error('Please log in to save profile');
-      onClose();
-      return;
+ const handleSave = async () => {
+  if (!user?.token) {
+    toast.error('Please log in to save profile');
+    onClose();
+    return;
+  }
+
+  setIsLoading(true);
+  try {
+    const formData = new FormData();
+    formData.append('userName', profile?.userName);
+    formData.append('email', profile?.email);
+
+    // Only include password if it's filled (i.e. user wants to change it)
+    if (profile?.password?.trim()) {
+      formData.append('password', profile.password);
     }
 
-    setIsLoading(true);
-    try {
-      const formData = new FormData();
-      formData.append('userName', profile?.userName);
-      formData.append('email', profile?.email);
-      formData.append('password', profile?.password);
-
-      dispatch(updateProfile(user?._id,formData));
-      toast.success('Profile updated successfully');
-      onSave(profile);
-      setIsLoading(false);
-      onClose();
-    } catch (err) {
-      toast.error(err.message || 'Failed to update profile');
-      setIsLoading(false);
-    }
-  };
+    dispatch(updateProfile(user?._id, formData));
+    toast.success('Profile updated successfully');
+    onSave(profile);
+    setIsLoading(false);
+    onClose();
+  } catch (err) {
+    toast.error(err.message || 'Failed to update profile');
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="profile-editor-overlay">

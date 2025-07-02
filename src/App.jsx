@@ -86,7 +86,7 @@ const App = () => {
           <Route path="/chat/:chatId" element={!user ? <Navigate to="/" /> : <ChatAi />} />
           <Route path="/payment/success" element={!user ?<Navigate to="/" />:<PaymentSuccess />} />
           <Route path="/payment/cancel" element={!user ?<Navigate to="/" />:<PaymentCancel />} />
-          <Route path="/dashboard" element={!user? <Navigate to="/" /> :<Dashboard/>} />
+          <Route path="/dashboard/overview" element={!user? <Navigate to="/" /> :<Dashboard/>} />
           <Route path="/dashboard/courses" element={!user ?<Navigate to="/" />:<StudentCourses/>} />
           <Route path="/mycourses/:id" element={!user ?<Navigate to="/" />:<CourseDetails/>} />
           <Route path="/dashboard/quizzes" element={!user? <Navigate to="/" /> :<Quizzes/>} />

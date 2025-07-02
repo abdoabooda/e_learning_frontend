@@ -43,8 +43,8 @@ const Students = () => {
                 <tr>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>role</th>
                   <th>Progress</th>
-                  <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -58,6 +58,7 @@ const Students = () => {
                       </div>
                     </td>
                     <td>{student?.email}</td>
+                    <td>{student?.role}</td>
                     <td>
                       <div className="progress-bar">
                         <div 

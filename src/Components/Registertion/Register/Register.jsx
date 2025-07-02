@@ -1,79 +1,73 @@
 import './Register.css';
 import micky from '../../../Assets/mickyhiar.png';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
-import { useState } from "react";
-import { useDispatch , useSelector } from "react-redux"
-import { registerUser } from "../../redux/apiCalls/authApiCall"
-import swal from "sweetalert"
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../redux/apiCalls/authApiCall";
+
 
 const Register = () => {
-
-  const dispatch = useDispatch()
-  const { registerMessage } = useSelector(state => state.auth)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // From Submit Handler
+
+  
+
+  // Form Submit Handler
   const formSubmitHandler = (e) => {
     e.preventDefault();
     if (userName.trim() === "") return toast.error("Username is required");
     if (email.trim() === "") return toast.error("Email is required");
     if (password.trim() === "") return toast.error("Password is required");
 
-    dispatch(registerUser({ userName, email, password }))
+    dispatch(registerUser({ userName, email, password }));
   };
 
-  const navigate = useNavigate()
-
-
-    if(registerMessage){
-    swal({
-      title : registerMessage,
-      icon : "success"
-    }).then(isOk => {
-      if(isOk){
-        navigate("/landing")
-      }
-    })
-  }
-    
   return (
     <div className='Register-Container'>
       <img src={micky} alt="Registration Illustration" />
       <form onSubmit={formSubmitHandler}>
-      <div className="Register-Form">
-        <h1>Create an Account</h1>
-        <div className="Register-Buttons">
-          <button className='Register-Log' onClick={() => navigate('/login')}>Log In</button>
-          <button className='Register-SignUp'>Register</button>
-        </div>
-        <div className="Register-Fields">
+        <div className="Register-Form">
+          <h1>Create an Account</h1>
+          <div className="Register-Buttons">
+            <button 
+              type="button" 
+              className='Register-Log' 
+              onClick={() => navigate('/login')}
+            >
+              Log In
+            </button>
+            <button type="button" className='Register-SignUp'>Register</button>
+          </div>
+          <div className="Register-Fields">
             <p>Email Address</p>
             <input
-             type="email" 
-             placeholder='Your Email'
-             onChange={(e) => setEmail(e.target.value)}
-             value={email} 
-             />
+              type="email" 
+              placeholder='Your Email'
+              onChange={(e) => setEmail(e.target.value)}
+              value={email} 
+            />
             <p>Username</p>
             <input 
-            type="text" 
-            placeholder='Your Username'
-            onChange={(e) => setUsername(e.target.value)}
-            value={userName} 
+              type="text" 
+              placeholder='Your Username'
+              onChange={(e) => setUsername(e.target.value)}
+              value={userName} 
             />
             <p>Password</p>
             <input 
-            type="password" 
-            placeholder='Your Password'
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-             />
+              type="password" 
+              placeholder='Your Password'
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
+          </div>
+          <button type="submit" className='Register-SignUp'>Register</button>
         </div>
-        <button className='Register-SignUp' >Register</button>
-      </div>
       </form>
     </div>
   );

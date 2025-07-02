@@ -84,6 +84,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background-color: whitesmoke !important;
 }
 
 .nav-link {
@@ -987,4 +988,253 @@ td {
   border: 1px solid var(--border-color);
   border-radius: 0.25rem;
   accent-color: var(--primary-color);
+}
+
+
+
+.dashboard-container {
+  padding: 1.5rem;
+}
+
+.dashboard-header {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.dashboard-subtitle {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin-top: 0.25rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.dashboard-card {
+  background-color: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-600);
+}
+
+.card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-top: 0.25rem;
+}
+
+.card-change {
+  font-size: 0.75rem;
+  color: var(--success-color);
+  margin-top: 0.25rem;
+}
+
+.icon-container {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  /* color: var(--white); */
+}
+
+.bg-blue {
+  background-color: var(--blue-500);
+}
+
+.bg-green {
+  background-color: var(--green-500);
+}
+
+.bg-purple {
+  background-color: var(--purple-500);
+}
+
+.bg-orange {
+  background-color: var(--orange-500);
+}
+
+.dashboard-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.card-heading {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.action-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+  text-align: left;
+}
+
+.action-blue {
+  background-color: var(--blue-50);
+}
+
+.action-blue:hover {
+  background-color: var(--blue-100);
+}
+
+.action-green {
+  background-color: var(--green-light);
+}
+
+.action-green:hover {
+  background-color: #BBF7D0;
+}
+
+.action-purple {
+  background-color: var(--purple-light);
+}
+
+.action-purple:hover {
+  background-color: #DDD6FE;
+}
+
+.action-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.75rem;
+}
+
+.action-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.action-blue .action-text {
+  color: var(--blue-700);
+}
+
+.action-green .action-text {
+  color: var(--green-600);
+}
+
+.action-purple .action-text {
+  color: var(--purple-600);
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.activity-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--blue-600);
+  border-radius: 50%;
+  margin-top: 0.5rem;
+}
+
+.activity-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-description {
+  font-size: 0.875rem;
+  color: var(--gray-900);
+}
+
+.activity-timestamp {
+  display: flex;
+  align-items: center;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--gray-500);
+}
+
+.timestamp-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.25rem;
+}
+
+.revenue-card {
+  background: linear-gradient(to right, var(--blue-500), var(--purple-600));
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  color: darkblue;
+}
+
+.revenue-value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.revenue-change {
+  font-size: 0.875rem;
+  color: var(--blue-200);
+  margin-top: 0.25rem;
+}
+
+.revenue-icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--blue-200);
+}
+
+@media (min-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

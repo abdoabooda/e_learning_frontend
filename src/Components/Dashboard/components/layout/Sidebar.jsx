@@ -8,8 +8,8 @@ const Sidebar = () => {
 
   const navItems = [
     {
-      path: '/dashboard' ,
-      label: 'Dashboard',
+      path: '/dashboard/overview' ,
+      label: 'Overview',
       icon: '📊',
       roles: ['admin']
     },
@@ -17,7 +17,7 @@ const Sidebar = () => {
       path: '/dashboard/courses',
       label: 'Courses',
       icon: '📚' ,
-      roles: ['admin', 'student']
+      roles: ['admin', 'student','instructor']
     },
     {
       path: '/dashboard/students',
@@ -29,7 +29,7 @@ const Sidebar = () => {
       path: '/dashboard/quizzes',
       label: 'Quizzes',
       icon:  '✍️',
-      roles: ['admin', 'student']
+      roles: ['admin', 'student','instructor']
     },
     {
       path: '/dashboard/performance',

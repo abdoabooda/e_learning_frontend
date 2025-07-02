@@ -35,32 +35,57 @@ const Courses = () => {
   const [success, setSuccess] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [filterLevel, setFilterLevel] = useState('');
+  const [isInitialized, setIsInitialized] = useState(false);
 
+  // Check if user is authenticated and has necessary data
   useEffect(() => {
     if (!user) {
       navigate('/login');
       return;
     }
+    setIsInitialized(true);
+  }, [user, navigate]);
 
-    // Fetch courses based on user role
-    switch (user.role) {
-      case 'student':
-        dispatch(fetchUserCourses()); // Enrolled courses
-        break;
-      case 'instructor':
-        dispatch(fetchInstructorCourses()); // Instructor's own courses
-        break;
-      case 'admin':
-        dispatch(fetchCourses()); // All courses
-        break;
-      default:
-        break;
-    }
-  }, [dispatch, user, navigate]);
+  // Fetch data based on user role - separate effect for data fetching
+  useEffect(() => {
+    if (!isInitialized || !user) return;
+
+    const fetchData = async () => {
+      try {
+        switch (user.role) {
+          case 'student':
+            // Check if data is already loaded to avoid unnecessary calls
+            if (!userCourses || userCourses.length === 0) {
+              await dispatch(fetchUserCourses());
+            }
+            break;
+          case 'instructor':
+            if (!instructorCourses || instructorCourses.length === 0) {
+              await dispatch(fetchInstructorCourses());
+            }
+            break;
+          case 'admin':
+            if (!courses || courses.length === 0) {
+              await dispatch(fetchCourses());
+            }
+            break;
+          default:
+            break;
+        }
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+        setError('Failed to load courses. Please try again.');
+      }
+    };
+
+    fetchData();
+  }, [dispatch, user?.role, isInitialized]); // Remove user from dependencies to avoid infinite loops
 
   // Get appropriate courses based on role
   const getCoursesData = () => {
-    switch (user?.role) {
+    if (!user) return [];
+    
+    switch (user.role) {
       case 'student':
         return userCourses || [];
       case 'instructor':
@@ -100,13 +125,13 @@ const Courses = () => {
     try {
       if (editingCourse) {
         // Update existing course
-        await dispatch(updateCourse(courseData,editingCourse._id));
+        await dispatch(updateCourse(courseData, editingCourse._id));
         
         // Update image if provided
         if (image) {
           const imageFormData = new FormData();
           imageFormData.append('image', image);
-          await dispatch(updateCourseImage(imageFormData,editingCourse._id));
+          await dispatch(updateCourseImage(imageFormData, editingCourse._id));
         }
         setSuccess('Course updated successfully!');
       } else {
@@ -159,7 +184,7 @@ const Courses = () => {
 
     if (window.confirm('Are you sure you want to delete this course?')) {
       try {
-     //   await dispatch(deleteCourse(courseId));
+        // await dispatch(deleteCourse(courseId));
         setSuccess('Course deleted successfully!');
         setError('');
         
@@ -224,7 +249,16 @@ const Courses = () => {
     return user && ['instructor', 'admin'].includes(user.role);
   };
 
-  if (!user) return null;
+  // Show loading while initializing or if user is not ready
+  if (!isInitialized || !user) {
+    return (
+      <Layout>
+        <div className="loading-state">
+          <p>Loading...</p>
+        </div>
+      </Layout>
+    );
+  }
 
   const filteredCourses = getFilteredCourses();
 
@@ -281,11 +315,11 @@ const Courses = () => {
         </div>
 
         {/* Loading State */}
-        {/* {loading && (
+        {loading && (
           <div className="loading-state">
             <p>Loading courses...</p>
           </div>
-        )} */}
+        )}
 
         {/* Courses Grid */}
         {!loading && (
@@ -445,3 +479,4 @@ const Courses = () => {
 };
 
 export default Courses;
+

@@ -24,8 +24,8 @@ function ProfileCard({ profile, onEdit, onLogout, onClose }) {
           </div>
           
           <div className="profile-info">
-            <h2>{profile.userName}</h2>
-            <p>{profile.email}</p>
+            <h2>{profile.userName || 'User'}</h2>
+            <p>{profile.email || 'example@gmail.com'}</p>
           </div>
         </div>
 

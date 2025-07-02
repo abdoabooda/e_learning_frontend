@@ -190,7 +190,7 @@ export function updateQuiz(newQuiz,quizId) {
         Authorization : "Bearer " + getState().auth.user.token,
       }
       });
-      dispatch(lessonActions.setQuiz(data.quiz))
+      dispatch(lessonActions.setQuiz(data))
     } catch (error) {
       toast.error(error.response.data.message);
     }

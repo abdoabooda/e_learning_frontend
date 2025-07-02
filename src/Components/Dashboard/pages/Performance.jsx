@@ -22,7 +22,7 @@ const Performance = () => {
       return;
     }
 
-    if (location.pathname === '/performance') {
+    if (location.pathname === '/dashboard/performance') {
       const fetchData = async () => {
         try {
           const response = await request.get('/api/users/profile/dashboard/performance', {
