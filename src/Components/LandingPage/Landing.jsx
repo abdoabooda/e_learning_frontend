@@ -1,6 +1,6 @@
 import { SiCisco, SiHuawei, SiIntel, SiGoogle } from 'react-icons/si';
 import './Landing.css'
-import landingimg from '../../Assets/Landingimg.png';
+import landingimg from '../../Assets/landingimg.png';
 import explore from '../../Assets/explore.png';
 import badge from '../../Assets/badge.png';
 import skills from '../../Assets/skills.png';
