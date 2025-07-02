@@ -1,6 +1,6 @@
 import React from 'react'
 import './Footer.css'
-import darklogo from '../../../Assets/DarkLogo.png';
+import darklogo from '../../../Assets/darklogo.png';
 const Footer = () => {
   return (
     <div className='footer'>
