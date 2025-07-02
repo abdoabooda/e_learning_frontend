@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './sidebar.css';
+import './SideBar.css';
 import { assets } from '../../Assets/chatAiAssets';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
