@@ -67,7 +67,7 @@ const Nav = () => {
         {user?.role === 'admin' && <li><a href="/dashboard/overview">Admin dashboard</a></li>}
         {user?.role === 'student' && <li><a href="/dashboard/performance">Student dashboard</a></li>}
         {user?.role === 'instructor' && <li><a href="/dashboard/instructor">Instructor dashboard</a></li>}
-        <li><a href="/Courses">Courses</a></li>
+        <li><a href="/courses">Courses</a></li>
         <li><a href="/AboutUs">AboutUs</a></li>
         <li><a href="/ContactUs">Contact Us</a></li>
       </ul>
