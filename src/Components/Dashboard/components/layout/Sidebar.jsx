@@ -29,7 +29,7 @@ const Sidebar = () => {
       path: '/dashboard/quizzes',
       label: 'Quizzes',
       icon:  '✍️',
-      roles: ['admin', 'student','instructor']
+      roles: ['admin', 'instructor']
     },
     {
       path: '/dashboard/performance',
