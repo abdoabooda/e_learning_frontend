@@ -57,7 +57,7 @@ export function buyCourse(courseId) {
   return async (dispatch,getState) => {
     try {
     dispatch(courseActions.setLoading())
-      const response = await request.post(`/api/payments/checkout`,{courseId},{
+      const response = await request.post(`/api/payments/web-checkout`,{courseId},{
         headers :{
           Authorization : "Bearer " + getState().auth.user.token,
           "Content-Type" : "application/json"
