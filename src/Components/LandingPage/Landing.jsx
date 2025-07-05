@@ -87,6 +87,7 @@ const Landing = () => {
           </button>
           <button className="Program" onClick={() => setShowProgramPopup(!showProgramPopup)}>Program</button>
           <button className="Assistant" onClick={handleClick}>AI Assistant</button>
+          <button className="Assistant" onClick={()=> navigate('/dashboard/courses')}>My Courses</button>
         </div>
         {showPartners && (
           <div className="partners_dropdown">
